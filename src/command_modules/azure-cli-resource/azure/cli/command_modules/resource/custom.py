@@ -11,6 +11,7 @@ import time
 from codecs import open as codecs_open
 
 from msrestazure.azure_exceptions import CloudError
+from azure.cli.commands.arm import register_generic_update
 from azure.mgmt.resource.resources import ResourceManagementClient
 from azure.mgmt.resource.resources.models.resource_group import ResourceGroup
 from azure.mgmt.resource.resources.models import GenericResource
@@ -273,6 +274,14 @@ def move_resource(ids, destination_group, destination_subscription_id=None):
                          resource_group=destination_group)
 
     return rcf.resources.move_resources(resources[0]['resource_group'], ids, target)
+
+register_generic_update('resource update',
+                        _resource_client_factory().resources.get,
+                        _resource_client_factory().resources.create_or_update)
+
+register_generic_update('resource group update',
+                        _resource_client_factory().resource_groups.get,
+                        _resource_client_factory().resource_groups.create_or_update)
 
 def _get_file_json(file_path):
     return _load_json(file_path, 'utf-8') \
