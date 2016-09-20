@@ -6,9 +6,11 @@
 import sys
 import os
 
+print('import telem')
 from azure.cli.core.telemetry import (init_telemetry, user_agrees_to_telemetry,
                                       telemetry_flush, log_telemetry)
 
+print('import main')
 import azure.cli.main
 
 try:
