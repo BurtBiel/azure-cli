@@ -6,10 +6,10 @@
 import sys
 import os
 
-import azure.cli.main
-
 from azure.cli.core.telemetry import (init_telemetry, user_agrees_to_telemetry,
                                       telemetry_flush, log_telemetry)
+
+import azure.cli.main
 
 try:
     try:
