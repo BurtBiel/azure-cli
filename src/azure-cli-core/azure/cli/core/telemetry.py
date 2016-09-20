@@ -21,7 +21,9 @@ try:
 except: #pylint: disable=bare-except
     core_version = None
 try:
+    print('import profile')
     from azure.cli.core._profile import Profile
+    print('done import profile')
 except: #pylint: disable=bare-except
     Profile = {}
 try:
@@ -49,6 +51,7 @@ def set_application(application, argcomplete_env_name):
 
 def init_telemetry():
     try:
+        print('init telemetry')
         instrumentation_key = '02b91c82-6729-4241-befc-e6d02ca4fbba'
 
         global client #pylint: disable=global-statement
