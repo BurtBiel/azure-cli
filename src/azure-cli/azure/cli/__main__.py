@@ -9,15 +9,16 @@ import os
 from azure.cli.core.telemetry import (init_telemetry, user_agrees_to_telemetry,
                                       telemetry_flush, log_telemetry)
 
+try:
+    if user_agrees_to_telemetry():
+        init_telemetry()
+except Exception: #pylint: disable=broad-except
+    pass
+
+
 import azure.cli.main
 
 try:
-    try:
-        if user_agrees_to_telemetry():
-            init_telemetry()
-    except Exception: #pylint: disable=broad-except
-        pass
-
     args = sys.argv[1:]
 
     # Check if we are in argcomplete mode - if so, we
